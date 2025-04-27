@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>APKPure डाउनलोड</title>
+    <style>
+        body {
+            background-color: #f4f4f4;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            font-size: 30px;
+            margin-top: 20px;
+            color: black;
+        }
+        p {
+            font-size: 18px;
+            margin-top: 10px;
+            color: black;
+        }
+
+        /* Search bar */
+        .search-bar {
+            padding: 10px;
+            font-size: 18px;
+            width: 80%;
+            margin-top: 20px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .search-btn {
+            background-color: #007BFF;
+            color: white;
+            padding: 12px 24px;
+            font-size: 18px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .search-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Search results */
+        .app-result {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            padding: 10px;
+            flex-direction: column;
+            align-items: center;
+        }
+        .app-result img {
+            width: 150px;
+            height: 150px;
+            border-radius: 5px;
+        }
+        .app-name {
+            margin-left: 15px;
+            font-size: 20px;
+            color: black;
+        }
+        .app-link {
+            margin-top: 10px;
+            display: inline-block;
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+
+        /* Bottom navigation buttons */
+        .bottom-btns {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 20px;
+        }
+        .bottom-btn {
+            background-color: #f1f1f1;
+            color: black;
+            padding: 10px;
+            border-radius: 50%;
+            text-align: center;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            font-size: 20px;
+            border: 2px solid #ccc;
+        }
+        .bottom-btn:hover {
+            background-color: #ddd;
+        }
+
+        /* Adjustments for icons */
+        .bottom-btn i {
+            font-size: 24px;
+        }
+    </style>
+    <!-- Adding Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <h1>APKPure डाउनलोड करें</h1>
+    <p>यहां से आप APKPure ऐप डाउनलोड कर सकते हैं।</p>
+
+    <!-- Search bar -->
+    <input type="text" id="searchInput" class="search-bar" placeholder="एप्लिकेशन या गेम सर्च करें... / Search for an app or game">
+
+    <!-- Search Button -->
+    <button class="search-btn" onclick="searchApp()">सर्च करें / Search</button>
+
+    <!-- Search Results -->
+    <div id="searchResults"></div>
+
+    <!-- Download Button -->
+    <a href="https://apkpure.com/" class="app-link" target="_blank">APKPure से डाउनलोड करें / Download from APKPure</a>
+
+    <!-- Bottom Navigation Buttons -->
+    <div class="bottom-btns">
+        <!-- Home Button (Google-like simple) -->
+        <div class="bottom-btn" onclick="window.location.href='index.html'"><i class="fas fa-home"></i></div>
+
+        <!-- History Button (Round, like YouTube history) -->
+        <div class="bottom-btn" onclick="window.location.href='history.html'"><i class="fas fa-history"></i></div>
+    </div>
+
+    <script>
+        function searchApp() {
+            var query = document.getElementById('searchInput').value.toLowerCase();
+            var searchResults = document.getElementById('searchResults');
+            searchResults.innerHTML = ''; // Clear previous results
+
+            if(query.trim() !== '') {
+                // Simulated app search data (replace with real API or database)
+                var apps = [
+                    { 
+                        name: 'GTA San Andreas', 
+                        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Gta_san_andreas_logo.svg/1200px-Gta_san_andreas_logo.svg.png',
+                        downloadLink: 'https://apkpure.com/gta-san-andreas/com.rockstargames.gtasa'
+                    },
+                    { 
+                        name: 'PUBG Mobile', 
+                        image: 'https://upload.wikimedia.org/wikipedia/commons/a/a1/PUBG_Mobile_logo.png',
+                        downloadLink: 'https://apkpure.com/pubg-mobile/com.tencent.ig'
+                    },
+                    { 
+                        name: 'Minecraft', 
+                        image: 'https://upload.wikimedia.org/wikipedia/commons/d/d4/Minecraft_logo.svg',
+                        downloadLink: 'https://apkpure.com/minecraft/com.mojang.minecraftpe'
+                    },
+                    { 
+                        name: 'Free Fire', 
+                        image: 'https://upload.wikimedia.org/wikipedia/commons/5/5c/Free_Fire_logo.png',
+                        downloadLink: 'https://apkpure.com/free-fire/com.dts.freefireth'
+                    }
+                ];
+
+                // Loop through apps and display matching results
+                var foundApps = apps.filter(function(app) {
+                    return app.name.toLowerCase().includes(query);
+                });
+
+                // Display results
+                foundApps.forEach(function(app) {
+                    var appDiv = document.createElement('div');
+                    appDiv.classList.add('app-result');
+                    appDiv.innerHTML = `
+                        <img src="${app.image}" alt="${app.name}">
+                        <div class="app-name">${app.name}</div>
+                        <a href="${app.downloadLink}" class="app-link" target="_blank">डाउनलोड करें / Download</a>
+                    `;
+                    searchResults.appendChild(appDiv);
+                });
+
+                if(foundApps.length === 0) {
+                    searchResults.innerHTML = '<p>कोई ऐप नहीं मिला / No app found.</p>';
+                }
+            } else {
+                searchResults.innerHTML = '<p>कृपया कुछ सर्च करें / Please search for an app.</p>';
+            }
+        }
+    </script>
+</body>
+</html>
